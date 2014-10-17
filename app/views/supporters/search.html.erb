@@ -37,11 +37,12 @@
         <td><%=supporter.department %></td>
         <td><%=supporter.message.truncate(20) %></td>
         <td>
-          <% done = (supporter.done ? 'Done' : 'Not Done')  %>
-          <%=link_to 'Edit', edit_supporter_path(supporter.id), class: "btn btn-default" %>
-          <%=link_to 'Delete', supporter_path(supporter.id), class: "btn btn-default", method: "delete" %>
-          <%=link_to done, update_done_path(supporter.id), class: "btn btn-default", method: "patch" %>
-
+          <div class="btn-group">
+            <% done = (supporter.done ? 'Done' : 'Not Done')  %>
+            <%=link_to 'Edit', edit_supporter_path(supporter.id), class: "btn btn-default" %>
+            <%=link_to 'Delete', supporter_path(supporter.id), class: "btn btn-default", method: "delete" %>
+            <%=link_to done, update_done_path(supporter.id), class: "btn btn-default", method: "patch" %>
+          </div>
         </td>
       </tr>
       <%end %>

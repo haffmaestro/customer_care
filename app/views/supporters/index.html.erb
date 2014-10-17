@@ -1,0 +1,60 @@
+    <div class="row">
+      <div class="col-md-0 col-sm-0"></div>
+      <div class="col-md-2 col-sm-2">
+        <%= link_to "New Support Request", new_supporter_path, class: "btn btn-default" %>
+      </div>
+      <div class="col-md-7"></div>
+      <div class="col-md-3">
+        <form action="/supporters/search" class="form-inline">
+          <%= form_tag(supporters_search_path, :method => "get", id: "search-form") do %>
+            <%= text_field_tag :search, params[:search], class: "form-control", placeholder: "Search Requests" %>
+            <%= submit_tag "Search", :name => nil, class: "form-control" %>
+          <% end %>
+        </form>
+        <div class="col-md-1 col-sm-0"></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-0 col-sm-0"></div>
+      <div class="col-md-12 col-sm-12">
+        <h2>Open Tickets</h2>
+
+        <table class="table">
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Department</th>
+            <th>Message</th>
+            <th>Actions</th>
+            
+          </tr>
+          <% @supporters.each do |supporter| %>
+          <tr>
+            <td><%=supporter.id %></td>
+            <td><%=link_to supporter.name, supporter %></td>
+            <td><%= mail_to(supporter.email, supporter.email) %></td>
+            <td><%=supporter.department %></td>
+            <td><%=supporter.message.truncate(20) %></td>
+            <td>
+              <% done = (supporter.done ? 'Done' : 'Not Done')  %>
+              <%=link_to 'Edit', edit_supporter_path(supporter.id), class: "btn btn-default" %>
+              <%=link_to 'Delete', supporter_path(supporter.id), class: "btn btn-default", method: "delete" %>
+              <%=link_to done, update_done_path(supporter.id), class: "btn btn-default", method: "patch" %>
+            </td>
+
+          </tr>
+          <%end %>
+        </table>
+        <div class="row">
+          <div class="col-md-4 col-sm-0"></div>
+          <div class="col-md-4 col-sm-12">
+            <%= will_paginate @locations %>
+          </div>
+          <div class="col-md-4 col-sm-0"></div>
+        </div>
+        
+      </div>
+      <div class="col-md-0 col-sm-0"></div>
+    </div>

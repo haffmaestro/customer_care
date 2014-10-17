@@ -1,0 +1,40 @@
+<div class="col-md-2">
+<label>Name</label>
+<br>
+<br>
+<br>
+<label>Email</label>
+<br>
+<label>Department</label>
+<br>
+<br>
+<label for=":description">Message</label>
+</div>
+<div class="col-md-6">
+<%= form_for @supporter, html: {role:"form"} do |f| %>
+<div class="form-group">
+  <%= f.text_field :name, class: "form-control" %>
+</div>
+<div class="form-group">
+  <%= f.text_field :email, class: "form-control" %>
+</div>
+<div class="form-group">
+  <p>
+  <%  tech = (@supporter.department == 'Technical' ? true : false)%>
+  <%  sales = (@supporter.department == 'Sales' ? true : false)%>
+  <%  marketing = (@supporter.department == 'Marketing' ? true : false)%>
+
+  Technical <%= radio_button_tag 'department', 'Technical', tech%>
+  Sales <%= radio_button_tag 'department', 'Sales', sales%>
+  Marketing <%= radio_button_tag 'department', 'Marketing', marketing%>
+  </p>
+</div>
+<div class="form-group">
+  
+  <%= f.text_area :message, size: "60x12", class: "form-control"%>
+</div>
+<div class="form-group">
+  <%= f.submit "#{@supporter.persisted? ? "Update" : "Create"}", class: "form-control"%>
+</div>
+<% end %>
+</div>

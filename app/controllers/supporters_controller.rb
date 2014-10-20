@@ -2,10 +2,11 @@ class SupportersController < ApplicationController
   before_action :find_supporter, only: [:show, :edit, :update, :destroy, :update_done]
 
   def index
-    if @supporters == nil
-      @supporters = Supporter.order(:done).paginate(page: params[:page], per_page:10)
-    else
-      
+    @search_term = params[:search]
+    @supporters  = Supporter.paginate(page: params[:page], per_page:10).
+                             order(:done)
+    if params[:search]
+      @supporters = @supporters.wildcard_search(@search_term)
     end
   end
 
@@ -55,22 +56,24 @@ class SupportersController < ApplicationController
     end
   end
 
-  def update_done
-    @supporter.done = (@supporter.done ? false : true)
-    @supporter.save
-    redirect_to supporters_path, notice: notice_creator('updated')
-  end
+  # def update_done
+  #   @supporter.done = !@supporter.done
+  #   @supporter.save
+  #   redirect_to supporters_path, notice: notice_creator('updated')
+  # end
 
-  def search
-    @search_term = params[:search]
-    @supporters = Supporter.wildcard_search(@search_term).paginate(page: params[:page], per_page:10).order(:done)
-  end
+  # def search
+  #   @search_term = params[:search]
+  #   @supporters = Supporter.wildcard_search(@search_term).
+  #                           paginate(page: params[:page], per_page:10).
+  #                           order(:done)
+  # end
 
 
   private
 
   def supporter_params
-    new_supporter = params.require(:supporter).permit(:name, :email, :message, :department)
+    new_supporter = params.require(:supporter).permit(:name, :email, :message, :department, :done)
     new_supporter[:department] = params[:department]
     new_supporter
 

@@ -6,7 +6,7 @@
       <div class="col-md-7"></div>
       <div class="col-md-3">
         <form action="/supporters/search" class="form-inline">
-          <%= form_tag(supporters_search_path, :method => "get", id: "search-form") do %>
+          <%= form_tag(supporters_path, :method => "get", id: "search-form") do %>
             <%= text_field_tag :search, params[:search], class: "form-control", placeholder: "Search Requests" %>
             <%= submit_tag "Search", :name => nil, class: "form-control" %>
           <% end %>
@@ -41,7 +41,7 @@
               <% done = (supporter.done ? 'Done' : 'Not Done')  %>
               <%=link_to 'Edit', edit_supporter_path(supporter.id), class: "btn btn-default" %>
               <%=link_to 'Delete', supporter_path(supporter.id), class: "btn btn-default", method: "delete" %>
-              <%=link_to done, update_done_path(supporter.id), class: "btn btn-default", method: "patch" %>
+              <%=link_to done, supporter_path(supporter, supporter: {done: !supporter.done}), class: "btn btn-default", method: "patch" %>
             </td>
 
           </tr>

@@ -56,6 +56,7 @@ class SupportersController < ApplicationController
     end
   end
 
+
   # def update_done
   #   @supporter.done = !@supporter.done
   #   @supporter.save

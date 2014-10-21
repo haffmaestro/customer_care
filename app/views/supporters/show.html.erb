@@ -6,9 +6,13 @@
     <h5>Department</h5>
     <p><%=@supporter.department %></p>
     <p><%=@supporter.message %></p>
-    <%= link_to "Edit", edit_supporter_path, class:"btn btn-default" %>
-    <%= link_to "Delete", supporter_path(@supporter), method: :delete, class:"btn btn-default" %>
-    </p>
-  </div>
-  <div class="col-md-2 col-sm-0"></div>
+    <div class="btn-group">
+    <% done = (@supporter.done ? 'Done' : 'Not Done')  %>
+      <%=link_to 'Edit', edit_supporter_path(@supporter.id), class: "btn btn-default" %>
+      <%=link_to 'Delete', supporter_path(@supporter.id), class: "btn btn-default", method: "delete" %>
+      <%=link_to done, update_done_path(@supporter.id), class: "btn btn-default", method: "patch" %>
+    </div>
+  </p>
+</div>
+<div class="col-md-2 col-sm-0"></div>
 </div>

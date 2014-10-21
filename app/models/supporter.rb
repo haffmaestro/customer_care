@@ -5,7 +5,7 @@ class Supporter < ActiveRecord::Base
   after_initialize :set_done
 
   def self.wildcard_search(search_term)
-    where("name ILIKE :search_term OR email ILIKE :search_term OR message ILIKE :search_term", {search_term: '%'+search_term+'%'})
+    where("name ILIKE :search_term OR email ILIKE :search_term OR message ILIKE :search_term OR department ILIKE :search_term", {search_term: '%'+search_term+'%'})
   end
 
   private

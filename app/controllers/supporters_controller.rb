@@ -1,5 +1,5 @@
 class SupportersController < ApplicationController
-  before_action :find_supporter, only: [:show, :edit, :update, :destroy, :update_done]
+  #before_action :find_supporter, only: [:show, :edit, :update, :destroy]
 
   def index
     @search_term = params[:search]

@@ -5,7 +5,7 @@
       </div>
       <div class="col-md-7"></div>
       <div class="col-md-3">
-        <form action="/supporters/search" class="form-inline">
+        <form action="/supporters" class="form-inline">
           <%= form_tag(supporters_path, :method => "get", id: "search-form") do %>
             <%= text_field_tag :search, params[:search], class: "form-control", placeholder: "Search Requests" %>
             <%= submit_tag "Search", :name => nil, class: "form-control" %>

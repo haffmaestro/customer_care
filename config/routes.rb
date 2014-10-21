@@ -2,7 +2,6 @@ Rails.application.routes.draw do
 
 root 'supporters#index'
 patch 'supporters/update/:id' => "supporters#update_done", as: :update_done
-get '/supporters/search' => "supporters#search"
 
 resources :supporters
   # The priority is based upon order of creation: first created -> highest priority.

@@ -40,7 +40,7 @@ group :development do
   gem "hirb"
   gem "awesome_print"
   gem 'spring'
-  gem 'quiet-assets'
+  gem 'quiet_assets'
 end
 
 # Use ActiveModel has_secure_password

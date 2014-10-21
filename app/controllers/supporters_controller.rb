@@ -58,7 +58,7 @@ class SupportersController < ApplicationController
   def update_done
     @supporter.done = (@supporter.done ? false : true)
     @supporter.save
-    redirect_to supporters_path, notice: notice_creator('updated')
+    redirect_to :back
   end
 
   def search
